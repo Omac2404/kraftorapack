@@ -58,11 +58,11 @@ export function SmtpForm({ initial, mailTo }: { initial: TechnicalSettings["smtp
       </div>
       <label className={labelCls}>
         Gönderen Adresi (From)
-        <input type="text" name="from" defaultValue={initial.from} placeholder="info@kraftorapack.com" className={inputCls} />
+        <input type="text" name="from" defaultValue={initial.from} placeholder="info@kraftora.com" className={inputCls} />
       </label>
       <label className={labelCls}>
         Formdan Gelen E-postaların Alıcıları (virgülle ayır)
-        <input type="text" name="mailTo" defaultValue={mailTo} placeholder="info@kraftorapack.com, satis@kraftorapack.com" className={inputCls} />
+        <input type="text" name="mailTo" defaultValue={mailTo} placeholder="info@kraftora.com, satis@kraftora.com" className={inputCls} />
       </label>
       <FormStatus state={state} pending={pending} />
     </form>

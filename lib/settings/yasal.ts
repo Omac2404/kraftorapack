@@ -22,8 +22,8 @@ export const defaultLegalSettings: LegalSettings = {
       slug: "gizlilik",
       title: { tr: "Gizlilik Politikası", en: "Privacy Policy" },
       body: {
-        tr: "Kraftora olarak gizliliğinize önem veriyoruz. Web sitemiz üzerinden paylaştığınız bilgiler yalnızca taleplerinizi karşılamak amacıyla kullanılır ve üçüncü taraflarla paylaşılmaz.\n\nSorularınız için info@kraftorapack.com adresinden bize ulaşabilirsiniz.",
-        en: "At Kraftora we value your privacy. Information you share through our website is used only to fulfil your requests and is never shared with third parties.\n\nFor any questions, contact us at info@kraftorapack.com.",
+        tr: "Kraftora olarak gizliliğinize önem veriyoruz. Web sitemiz üzerinden paylaştığınız bilgiler yalnızca taleplerinizi karşılamak amacıyla kullanılır ve üçüncü taraflarla paylaşılmaz.\n\nSorularınız için info@kraftora.com adresinden bize ulaşabilirsiniz.",
+        en: "At Kraftora we value your privacy. Information you share through our website is used only to fulfil your requests and is never shared with third parties.\n\nFor any questions, contact us at info@kraftora.com.",
       },
     },
     {

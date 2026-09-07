@@ -30,19 +30,19 @@ export type ContactSettings = {
 };
 
 export const defaultContactSettings: ContactSettings = {
-  email: "info@kraftorapack.com",
-  phone: "+90 533 771 08 92",
-  phoneHref: "+905337710892",
+  email: "info@kraftora.com",
+  phone: "+90 544 979 26 20",
+  phoneHref: "+905449792620",
   address: {
-    tr: "Kraftora Ambalaj Çözümleri, Alsancak, Kıbrıs Şehitleri Cad. No:42 Konak, İzmir 35220, Türkiye",
-    en: "Kraftora Packaging Solutions, Alsancak, Kıbrıs Şehitleri Cad. No:42 Konak, İzmir 35220, Turkey",
+    tr: "Mansuroğlu Mah. 286/1 Sk. No: 1 İç Kapı No: 215 Bayraklı / İzmir",
+    en: "Mansuroğlu Mah. 286/1 Sk. No: 1 Inner Door No: 215 Bayraklı / İzmir, Türkiye",
   },
   hours: { tr: "Pzt – Cum, 09:00 – 18:00", en: "Mon – Fri, 09:00 – 18:00" },
   replyNote: { tr: "24 saat içinde yanıt veriyoruz", en: "We reply within 24 hours" },
-  location: { tr: "İzmir Türkiye", en: "İzmir Turkey" },
+  location: { tr: "Bayraklı, İzmir", en: "Bayraklı, İzmir" },
   social: { facebook: "#", instagram: "#", x: "#", linkedin: "" },
   mapEmbed:
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d49919.44397349842!2d27.0834!3d38.4237!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14bbd862a762cacd%3A0x628cbba1c6dfe46e!2zxLB6bWly!5e0!3m2!1str!2str!4v1700000000000!5m2!1str!2str",
+    "https://maps.google.com/maps?q=Mansuro%C4%9Flu%20Mah.%20286%2F1%20Sk.%20No%3A1%20Bayrakl%C4%B1%20%C4%B0zmir&z=16&hl=tr&output=embed",
   page: {
     title: { tr: "Bize Ulaşın", en: "Get in Touch" },
     subtitle: {

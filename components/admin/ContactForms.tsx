@@ -20,7 +20,7 @@ export function ContactSettingsForm({ initial }: { initial: ContactSettings }) {
         </label>
         <label className={labelCls}>
           Telefon (tel: bağlantısı, yalnızca rakam)
-          <input type="text" name="phoneHref" required defaultValue={initial.phoneHref} placeholder="+905337710892" className={inputCls} />
+          <input type="text" name="phoneHref" required defaultValue={initial.phoneHref} placeholder="+905449792620" className={inputCls} />
         </label>
       </div>
       <LTextarea name="address" label="Adres" value={initial.address} rows={2} />
