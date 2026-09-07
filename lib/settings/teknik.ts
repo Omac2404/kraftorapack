@@ -42,6 +42,7 @@ export const defaultTechnicalSettings: TechnicalSettings = {
       en: "Kraftora: custom-printed, 100% recyclable kraft packaging — pizza boxes, burger boxes, paper bags, e-commerce boxes and more, tailored to your brand.",
     },
   },
+  // Adresler tek dillidir; dil çerezde tutulduğu için dile özel adres yok
   sitemap: [
     "/",
     "/hakkimizda",
@@ -49,11 +50,5 @@ export const defaultTechnicalSettings: TechnicalSettings = {
     "/galeri",
     "/blog",
     "/iletisim",
-    "/en",
-    "/en/about-us",
-    "/en/products",
-    "/en/gallery",
-    "/en/blog",
-    "/en/contact",
   ],
 };
