@@ -26,6 +26,21 @@ const ERR = {
     generic: "Please check the form.",
     rate: "Too many submissions. Please try again later.",
   },
+  fr: {
+    name: "Veuillez saisir votre nom",
+    email: "Saisissez une adresse e-mail valide",
+    message: "Votre message est trop court",
+    phone: "Veuillez saisir votre numéro de téléphone",
+    generic: "Veuillez vérifier le formulaire.",
+    rate: "Trop d’envois. Veuillez réessayer plus tard.",
+  },
+};
+
+// Teklif formunda panele yazılan sabit alan adları
+const FIELD = {
+  tr: { product: "Ürün", company: "Firma" },
+  en: { product: "Product", company: "Company" },
+  fr: { product: "Produit", company: "Société" },
 };
 
 async function clientIp() {
@@ -130,7 +145,7 @@ export async function submitQuote(_prev: FormState, formData: FormData): Promise
   // Alan etiketleri panelde okunabilir olsun diye "label:<ad>" girdileriyle gelir.
   const skip = new Set(["product", "name", "email", "phone", "company", "notes", "lang", "website"]);
   const meta: Record<string, string> = { product: parsed.data.product };
-  const labels: Record<string, string> = { product: lang === "tr" ? "Ürün" : "Product" };
+  const labels: Record<string, string> = { product: FIELD[lang].product };
   for (const [key, value] of formData.entries()) {
     if (typeof value !== "string") continue;
     if (key.startsWith("label:")) {
@@ -146,7 +161,7 @@ export async function submitQuote(_prev: FormState, formData: FormData): Promise
   for (const [k, v] of Object.entries(meta)) {
     readable[labels[k] ?? k] = v.slice(0, 500);
   }
-  if (parsed.data.company) readable[lang === "tr" ? "Firma" : "Company"] = parsed.data.company;
+  if (parsed.data.company) readable[FIELD[lang].company] = parsed.data.company;
 
   await db.insert(submissions).values({
     kind: "quote",

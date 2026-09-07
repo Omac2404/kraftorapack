@@ -3,7 +3,7 @@ import { Marquee } from "@/components/site/Marquee";
 import { PageIntro } from "@/components/site/PageIntro";
 import { ProductCard } from "@/components/site/ProductCard";
 import { getGeneralSettings, getPagesSettings } from "@/lib/data/settings";
-import { getPublishedProducts, productSlug } from "@/lib/data/content";
+import { getPublishedProducts } from "@/lib/data/content";
 import { getDict, href } from "@/lib/i18n";
 import { t } from "@/lib/l10n";
 import { resolveLang } from "@/lib/lang";
@@ -32,7 +32,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ lang:
           {products.map((p) => (
             <ProductCard
               key={p.id}
-              href={href(lang, "urunler", productSlug(p, lang))}
+              href={href("urunler", p.slug)}
               image={p.images[0] ?? null}
               title={t(p.title, lang)}
               text={t(p.listText, lang)}

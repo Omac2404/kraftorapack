@@ -14,7 +14,7 @@ export default async function NotFound() {
       <h1 className="mt-4 text-2xl font-bold text-ink">{d.notFound.title}</h1>
       <p className="mt-2 max-w-md text-muted">{d.notFound.text}</p>
       <Link
-        href={lang === "en" ? "/en" : "/"}
+        href="/"
         className="mt-8 rounded-md bg-brand-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-600"
       >
         {d.notFound.home}

@@ -1,13 +1,15 @@
-import type { L } from "@/lib/l10n";
+import type { L, Lang } from "@/lib/l10n";
 import type { IconCard, ServiceTab } from "@/lib/content/types";
 
 // Ana sayfa ve site geneli içerikler: panelden düzenlenir, site_settings("genel") altında saklanır.
 
-// Dile özel görsel: EN boşsa TR görseli kullanılır (banner üzerinde metin olduğu için ayrı yüklenebilir)
+// Dile özel görsel: panelde TR ve EN görseli ayrı yüklenir (banner üzerinde metin var).
+// Fransızca için ayrı görsel yoktur; İngilizce görsel, o da yoksa Türkçe görsel kullanılır.
 export type LImage = { tr: string | null; en: string | null };
 
-export function pickImage(img: LImage, lang: "tr" | "en"): string | null {
-  return img[lang] ?? (lang === "tr" ? img.en : img.tr);
+export function pickImage(img: LImage, lang: Lang): string | null {
+  if (lang === "tr") return img.tr ?? img.en;
+  return img.en ?? img.tr;
 }
 
 export type GeneralSettings = {

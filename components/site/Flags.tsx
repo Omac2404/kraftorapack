@@ -1,28 +1,38 @@
-// Dil seçici bayrakları (24x18) — GTranslate görünümüne benzer basit SVG'ler
+// Dil seçici bayrakları — hepsi 3:2 oranında inline SVG
+// (Windows'ta emoji bayraklar görünmediği için gerçek SVG kullanılıyor).
 
 export function FlagTR({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 18" className={className} aria-hidden="true">
-      <rect width="24" height="18" fill="#e30a17" />
-      <circle cx="9.5" cy="9" r="4.6" fill="#fff" />
-      <circle cx="10.6" cy="9" r="3.7" fill="#e30a17" />
-      <path
-        d="M14.3 9l2.9.95-1.8-2.47v3.04l1.8-2.47L14.3 9l3.3.02-2.7 1.9 1-3.2-1 3.2 1-3.2z"
+    <svg viewBox="0 0 30 20" className={className} aria-hidden="true">
+      <rect width="30" height="20" fill="#E30A17" />
+      <circle cx="11.5" cy="10" r="5" fill="#fff" />
+      <circle cx="12.75" cy="10" r="4" fill="#E30A17" />
+      <polygon
         fill="#fff"
+        points="18.5,7.7 19.06,9.23 20.69,9.29 19.4,10.29 19.85,11.86 18.5,10.95 17.15,11.86 17.6,10.29 16.31,9.29 17.94,9.23"
       />
-      <polygon points="15.2,6.8 15.9,8.6 17.8,8.6 16.3,9.7 16.9,11.5 15.2,10.4 13.5,11.5 14.1,9.7 12.6,8.6 14.5,8.6" fill="#fff" />
     </svg>
   );
 }
 
 export function FlagEN({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 18" className={className} aria-hidden="true">
-      <rect width="24" height="18" fill="#012169" />
-      <path d="M0 0l24 18M24 0L0 18" stroke="#fff" strokeWidth="3.4" />
-      <path d="M0 0l24 18M24 0L0 18" stroke="#c8102e" strokeWidth="1.4" />
-      <path d="M12 0v18M0 9h24" stroke="#fff" strokeWidth="5" />
-      <path d="M12 0v18M0 9h24" stroke="#c8102e" strokeWidth="3" />
+    <svg viewBox="0 0 60 40" className={className} aria-hidden="true">
+      <rect width="60" height="40" fill="#012169" />
+      <path d="M0 0l60 40M60 0L0 40" stroke="#fff" strokeWidth="8" />
+      <path d="M0 0l60 40M60 0L0 40" stroke="#C8102E" strokeWidth="4" />
+      <path d="M30 0v40M0 20h60" stroke="#fff" strokeWidth="12" />
+      <path d="M30 0v40M0 20h60" stroke="#C8102E" strokeWidth="7" />
+    </svg>
+  );
+}
+
+export function FlagFR({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 30 20" className={className} aria-hidden="true">
+      <rect width="10" height="20" fill="#0055A4" />
+      <rect x="10" width="10" height="20" fill="#fff" />
+      <rect x="20" width="10" height="20" fill="#EF4135" />
     </svg>
   );
 }

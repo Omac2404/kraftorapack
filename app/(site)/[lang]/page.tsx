@@ -7,7 +7,7 @@ import { ServicesTabs } from "@/components/site/ServicesTabs";
 import { Inline } from "@/components/site/RichText";
 import { getGeneralSettings } from "@/lib/data/settings";
 import { pickImage } from "@/lib/settings/genel";
-import { getPublishedPosts, getPublishedProducts, postSlug, productSlug } from "@/lib/data/content";
+import { getPublishedPosts, getPublishedProducts } from "@/lib/data/content";
 import { formatDate, getDict, href } from "@/lib/i18n";
 import { t } from "@/lib/l10n";
 import { resolveLang } from "@/lib/lang";
@@ -113,7 +113,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
             {homeProducts.map((p) => (
               <ProductCard
                 key={p.id}
-                href={href(lang, "urunler", productSlug(p, lang))}
+                href={href("urunler", p.slug)}
                 image={p.images[0] ?? null}
                 title={t(p.title, lang)}
                 text={t(p.cardText, lang)}
@@ -122,7 +122,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
           </div>
           <div className="mt-8 text-right">
             <Link
-              href={href(lang, "urunler")}
+              href={href("urunler")}
               className="inline-flex items-center gap-1 rounded-[10px] border-2 border-brand-600 px-[50px] py-2 text-[13.5px] font-bold text-brand-600 transition hover:bg-brand-600 hover:text-white"
             >
               {d.allProducts}
@@ -163,7 +163,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
               {posts.map((p) => (
                 <BlogCard
                   key={p.id}
-                  href={href(lang, "blog", postSlug(p, lang))}
+                  href={href("blog", p.slug)}
                   image={p.cover}
                   title={t(p.title, lang)}
                   excerpt={t(p.excerpt, lang)}

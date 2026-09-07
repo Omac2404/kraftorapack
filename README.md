@@ -1,6 +1,6 @@
 # Kraftora
 
-kraftorapack.com — sürdürülebilir kraft ambalaj üreticisi kurumsal sitesi. Özel yazılım: iki dilli (TR/EN) kurumsal site + yönetim paneli. WordPress'ten bağımsız.
+kraftorapack.com — sürdürülebilir kraft ambalaj üreticisi kurumsal sitesi. Özel yazılım: üç dilli (TR/EN/FR) kurumsal site + yönetim paneli. WordPress'ten bağımsız.
 
 ## Stack
 
@@ -32,13 +32,16 @@ npm run db:seed-content
 npm run dev
 ```
 
-Site: http://localhost:3000 (TR) — http://localhost:3000/en (EN) — Admin panel: http://localhost:3000/admin
+Site: http://localhost:3000 — Admin panel: http://localhost:3000/admin
+
+Dil header'daki bayraklardan seçilir; adres değişmez, tercih `lang` çerezinde tutulur.
 
 ## Dizin yapısı
 
 ```
 app/
-  (site)/[lang]/   # Kamuya açık sayfalar (klasör adları Türkçe; /en adresleri middleware ile eşlenir)
+  (site)/[lang]/   # Kamuya açık sayfalar (klasör adları Türkçe; [lang] adreste görünmez,
+                   # middleware çerezdeki dile göre buraya rewrite eder)
   admin/
     (auth)/giris   # Panel girişi
     (panel)/       # Korumalı panel sayfaları
@@ -51,7 +54,9 @@ lib/
   auth/            # Oturum, şifre, rate-limit
   settings/        # Panelden yönetilen ayarların tipleri ve varsayılanları
   data/            # DB okuma/yazma
-  i18n.ts, l10n.ts # Dil altyapısı
+  i18n.ts          # Adresler + arayüz metinleri (dict: tr/en/fr)
+  l10n.ts          # Dil tipleri ve t() çeviri okuyucusu
+  i18n-fr.ts       # Fransızca içerik sözlüğü (Türkçe kaynak metin → Fransızca)
 public/            # Statik görseller (ürün, galeri, blog, banner)
 public/uploads/    # Panelden yüklenen dosyalar (canlıda volume)
 ```

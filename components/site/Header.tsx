@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { alternatePath, href, type RouteKey } from "@/lib/i18n";
+import { href, type RouteKey } from "@/lib/i18n";
 import type { Lang } from "@/lib/l10n";
 import { Icon, type IconName } from "./Icon";
-import { FlagEN, FlagTR } from "./Flags";
+import { LangSwitcher } from "./LangSwitcher";
 
 export type NavLabels = {
   home: string;
@@ -54,35 +54,12 @@ export function Header({ lang, labels, menuLabel, email, phone, phoneHref, socia
   useEffect(() => setOpen(false), [pathname]);
 
   const isActive = (key: RouteKey) => {
-    const target = href(lang, key);
+    const target = href(key);
     if (key === "home") return pathname === target;
     return pathname === target || pathname.startsWith(`${target}/`);
   };
 
   const socialItems = SOCIAL.filter((s) => social[s.key]);
-  const trHref = alternatePath(pathname, "tr");
-  const enHref = alternatePath(pathname, "en");
-
-  const LangSwitch = ({ className = "" }: { className?: string }) => (
-    <div className={`flex items-center gap-1 ${className}`}>
-      <a
-        href={trHref}
-        aria-label="Türkçe"
-        title="Türkçe"
-        className={`rounded-sm p-0.5 transition ${lang === "tr" ? "ring-1 ring-brand-500" : "opacity-75 hover:opacity-100"}`}
-      >
-        <FlagTR className="h-[18px] w-6" />
-      </a>
-      <a
-        href={enHref}
-        aria-label="English"
-        title="English"
-        className={`rounded-sm p-0.5 transition ${lang === "en" ? "ring-1 ring-brand-500" : "opacity-75 hover:opacity-100"}`}
-      >
-        <FlagEN className="h-[18px] w-6" />
-      </a>
-    </div>
-  );
 
   return (
     <header className="sticky top-0 z-40 bg-white shadow-[0_1px_15px_rgba(0,0,0,0.1)]">
@@ -99,7 +76,7 @@ export function Header({ lang, labels, menuLabel, email, phone, phoneHref, socia
           <Icon name="menu" className="size-7" strokeWidth={1.6} />
         </button>
 
-        <Link href={href(lang, "home")} className="shrink-0" aria-label="Kraftora">
+        <Link href={href("home")} className="shrink-0" aria-label="Kraftora">
           <Image
             src="/logo.png"
             alt="Kraftora"
@@ -114,7 +91,7 @@ export function Header({ lang, labels, menuLabel, email, phone, phoneHref, socia
           {NAV.map((item, i) => (
             <Link
               key={item.key}
-              href={href(lang, item.key)}
+              href={href(item.key)}
               className={`relative px-[13px] text-[15px] font-bold transition hover:text-brand-700 ${
                 isActive(item.key) ? "text-brand-700" : "text-[#1c1c1c]"
               } ${i > 0 ? "before:absolute before:left-0 before:top-1/2 before:h-[15px] before:w-px before:-translate-y-1/2 before:bg-line" : ""}`}
@@ -126,7 +103,7 @@ export function Header({ lang, labels, menuLabel, email, phone, phoneHref, socia
 
         {/* Mobil: sağda dil seçici (hamburger ile simetri) */}
         <div className="lg:hidden">
-          <LangSwitch />
+          <LangSwitcher current={lang} />
         </div>
       </div>
 
@@ -148,7 +125,7 @@ export function Header({ lang, labels, menuLabel, email, phone, phoneHref, socia
             </li>
           </ul>
           <div className="flex items-center">
-            <LangSwitch />
+            <LangSwitcher current={lang} />
             {socialItems.length > 0 && (
               <ul className="ml-4 flex items-center gap-3 border-l border-line pl-4 text-[#9a9a9a]">
                 {socialItems.map((s) => (
@@ -199,7 +176,7 @@ export function Header({ lang, labels, menuLabel, email, phone, phoneHref, socia
             {NAV.map((item) => (
               <Link
                 key={item.key}
-                href={href(lang, item.key)}
+                href={href(item.key)}
                 className={`border-b border-line/70 px-3 py-3 text-[15px] font-bold ${
                   isActive(item.key) ? "text-brand-700" : "text-[#1c1c1c]"
                 }`}
@@ -218,7 +195,7 @@ export function Header({ lang, labels, menuLabel, email, phone, phoneHref, socia
               {phone}
             </a>
             <div className="flex items-center justify-between pt-1">
-              <LangSwitch />
+              <LangSwitcher current={lang} />
               {socialItems.length > 0 && (
                 <ul className="flex items-center gap-3 text-[#9a9a9a]">
                   {socialItems.map((s) => (

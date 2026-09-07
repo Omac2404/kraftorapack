@@ -15,20 +15,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   const now = new Date();
+  // Her sayfanın tek adresi var: dil çerezde tutulduğu için dile göre ayrı adres yok
   return [
     // Panelden yönetilen sabit sayfalar
     ...technical.sitemap.map((path) => ({
       url: `${base}${path === "/" ? "" : path}` || base,
       lastModified: now,
     })),
-    // Yayındaki ürün ve blog sayfaları iki dilde otomatik eklenir
-    ...products.flatMap((p) => [
-      { url: `${base}${href("tr", "urunler", p.slug)}`, lastModified: now },
-      { url: `${base}${href("en", "urunler", p.slugEn)}`, lastModified: now },
-    ]),
-    ...posts.flatMap((p) => [
-      { url: `${base}${href("tr", "blog", p.slug)}`, lastModified: now },
-      { url: `${base}${href("en", "blog", p.slugEn)}`, lastModified: now },
-    ]),
+    // Yayındaki ürün ve blog sayfaları
+    ...products.map((p) => ({ url: `${base}${href("urunler", p.slug)}`, lastModified: now })),
+    ...posts.map((p) => ({ url: `${base}${href("blog", p.slug)}`, lastModified: now })),
   ];
 }

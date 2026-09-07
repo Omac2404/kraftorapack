@@ -1,58 +1,46 @@
 import type { Lang } from "@/lib/l10n";
 
-// Sayfa rotaları: klasör adları Türkçe (app/(site)/[lang]/<tr>), İngilizce
-// adresler middleware tarafından Türkçe klasöre rewrite edilir.
+// Adresler tek dillidir (Türkçe klasör adları): /urunler, /hakkimizda …
+// Dil tercihi çerezde tutulduğu için adres dile göre değişmez; middleware
+// isteği çerezdeki dile göre app/(site)/[lang]/… rotasına rewrite eder.
 export const ROUTES = {
-  home: { tr: "", en: "" },
-  hakkimizda: { tr: "hakkimizda", en: "about-us" },
-  urunler: { tr: "urunler", en: "products" },
-  galeri: { tr: "galeri", en: "gallery" },
-  blog: { tr: "blog", en: "blog" },
-  iletisim: { tr: "iletisim", en: "contact" },
-  kvkk: { tr: "kvkk", en: "kvkk" },
-  gizlilik: { tr: "gizlilik-politikasi", en: "privacy-policy" },
-  cerez: { tr: "cerez-politikasi", en: "cookie-policy" },
+  home: "",
+  hakkimizda: "hakkimizda",
+  urunler: "urunler",
+  galeri: "galeri",
+  blog: "blog",
+  iletisim: "iletisim",
+  kvkk: "kvkk",
+  gizlilik: "gizlilik-politikasi",
+  cerez: "cerez-politikasi",
 } as const;
 
 export type RouteKey = keyof typeof ROUTES;
 
-// Dile göre tam adres: TR öneksiz (/urunler), EN /en önekli (/en/products)
-export function href(lang: Lang, key: RouteKey, rest?: string): string {
-  const prefix = lang === "en" ? "/en" : "";
-  const seg = ROUTES[key][lang];
-  const path = [seg, rest].filter(Boolean).join("/");
-  return `${prefix}/${path}` || "/";
+export function href(key: RouteKey, rest?: string): string {
+  const path = [ROUTES[key], rest].filter(Boolean).join("/");
+  return `/${path}`;
 }
 
-// İngilizce ilk segmenti Türkçe klasör adına çevirir (middleware için)
-export function enSegmentToTr(seg: string): string | null {
-  for (const r of Object.values(ROUTES)) {
-    if (r.en && r.en === seg) return r.tr;
-  }
-  return null;
+// Eski İngilizce adresler (/en/products) artık kullanılmıyor; middleware bunları
+// Türkçe karşılığına 308 ile yönlendirir ve dili İngilizceye çevirir.
+const LEGACY_EN: Record<string, string> = {
+  "about-us": "hakkimizda",
+  products: "urunler",
+  gallery: "galeri",
+  blog: "blog",
+  contact: "iletisim",
+  kvkk: "kvkk",
+  "privacy-policy": "gizlilik-politikasi",
+  "cookie-policy": "cerez-politikasi",
+};
+
+export function legacyEnSegmentToTr(seg: string): string {
+  return LEGACY_EN[seg] ?? seg;
 }
 
-export function trSegmentToEn(seg: string): string | null {
-  for (const r of Object.values(ROUTES)) {
-    if (r.tr && r.tr === seg) return r.en;
-  }
-  return null;
-}
-
-// Aynı sayfanın diğer dildeki adresi (dinamik slug'lar sayfa tarafında düzeltilir)
-export function alternatePath(pathname: string, target: Lang): string {
-  const clean = pathname.replace(/^\/en(?=\/|$)/, "");
-  const parts = clean.split("/").filter(Boolean);
-  if (parts.length === 0) return target === "en" ? "/en" : "/";
-  const [first, ...rest] = parts;
-  let seg: string | null = first;
-  if (target === "en") seg = trSegmentToEn(first) ?? first;
-  else seg = first; // Türkçe klasör adları zaten canonical
-  const path = [seg, ...rest].join("/");
-  return target === "en" ? `/en/${path}` : `/${path}`;
-}
-
-// Arayüz metinleri (menü, buton, form etiketleri). İçerik metinleri DB'den gelir.
+// Arayüz metinleri (menü, buton, form etiketleri). İçerik metinleri DB'den gelir;
+// Fransızca içerik çevirileri lib/i18n-fr.ts sözlüğünden okunur.
 export const dict = {
   tr: {
     nav: {
@@ -80,6 +68,9 @@ export const dict = {
       rights: "Tüm hakları saklıdır.",
       designedBy: "Tasarım",
       legal: "Yasal",
+      kvkk: "KVKK",
+      privacy: "Gizlilik Politikası",
+      cookiePolicy: "Çerez Politikası",
     },
     form: {
       name: "Ad",
@@ -148,6 +139,9 @@ export const dict = {
       rights: "All rights reserved.",
       designedBy: "Designed by",
       legal: "Legal",
+      kvkk: "KVKK",
+      privacy: "Privacy Policy",
+      cookiePolicy: "Cookie Policy",
     },
     form: {
       name: "Name",
@@ -190,6 +184,77 @@ export const dict = {
       home: "Back to home",
     },
   },
+  fr: {
+    nav: {
+      home: "Accueil",
+      about: "À propos",
+      products: "Produits",
+      gallery: "Galerie",
+      blog: "Blog",
+      contact: "Contact",
+    },
+    menu: "Menu",
+    allProducts: "Tous les produits",
+    viewProduct: "Voir le produit",
+    viewProducts: "Voir les produits",
+    contactUs: "Contactez-nous",
+    sendQuote: "Demander un devis",
+    readPost: "Lire l’article",
+    minRead: "min de lecture",
+    otherPosts: "Autres articles",
+    noPosts: "Aucun article pour le moment.",
+    footer: {
+      contact: "Contact",
+      siteMap: "Plan du site",
+      sustainability: "Durabilité",
+      rights: "Tous droits réservés.",
+      designedBy: "Conception",
+      legal: "Mentions légales",
+      kvkk: "KVKK",
+      privacy: "Politique de confidentialité",
+      cookiePolicy: "Politique de cookies",
+    },
+    form: {
+      name: "Prénom",
+      lastName: "Nom",
+      fullName: "Nom et prénom",
+      email: "Adresse e-mail",
+      phone: "Numéro de téléphone",
+      company: "Nom de l’entreprise",
+      message: "Votre message",
+      notes: "Notes complémentaires",
+      send: "Envoyer",
+      sending: "Envoi…",
+      success: "Merci ! Votre message a bien été reçu. Nous vous répondrons dans les plus brefs délais.",
+      quoteSuccess: "Votre demande de devis a bien été reçue. Notre équipe vous contactera très prochainement.",
+      required: "obligatoire",
+      select: "-- Sélectionner --",
+      material: "Matériau",
+      print: "Impression",
+      finishing: "Finition",
+      additionalOptions: "Options supplémentaires",
+      quantity: "Quantité",
+      usage: "Type d’utilisation",
+      close: "Fermer",
+      inquiry: "Formulaire de devis",
+      materials: ["Carton kraft", "Carton blanc, kraft ondulé", "Micro-cannelure (Micro-Flute)", "Je souhaite un conseil"],
+      prints: ["Sans impression", "1 couleur", "2 couleurs", "Quadrichromie (CMJN)", "Je souhaite un conseil"],
+      finishings: ["Aucune", "Pelliculage mat", "Pelliculage brillant", "Vernis UV", "Je souhaite un conseil"],
+      quantities: ["500", "1000", "2500", "5000", "10000", "25000+"],
+      usages: ["Sur place", "À emporter", "Livraison", "Tous"],
+    },
+    cookie: {
+      text: "Notre site utilise uniquement les cookies nécessaires à son bon fonctionnement. Pour plus de détails,",
+      link: "consultez notre politique de cookies",
+      after: ".",
+      accept: "Accepter",
+    },
+    notFound: {
+      title: "Page introuvable",
+      text: "La page que vous recherchez a peut-être été déplacée ou supprimée.",
+      home: "Retour à l’accueil",
+    },
+  },
 } as const;
 
 export type Dict = (typeof dict)["tr"];
@@ -198,9 +263,11 @@ export function getDict(lang: Lang): Dict {
   return dict[lang] as Dict;
 }
 
+const LOCALES: Record<Lang, string> = { tr: "tr-TR", en: "en-GB", fr: "fr-FR" };
+
 export function formatDate(date: string | Date, lang: Lang) {
   const d = typeof date === "string" ? new Date(date) : date;
-  return d.toLocaleDateString(lang === "tr" ? "tr-TR" : "en-GB", {
+  return d.toLocaleDateString(LOCALES[lang], {
     day: "2-digit",
     month: "2-digit",
     year: "numeric",

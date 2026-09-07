@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Marquee } from "@/components/site/Marquee";
 import { BlogCard } from "@/components/site/BlogCard";
 import { getGeneralSettings, getPagesSettings } from "@/lib/data/settings";
-import { getPublishedPosts, postSlug } from "@/lib/data/content";
+import { getPublishedPosts } from "@/lib/data/content";
 import { formatDate, getDict, href } from "@/lib/i18n";
 import { t } from "@/lib/l10n";
 import { resolveLang } from "@/lib/lang";
@@ -36,7 +36,7 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
             {posts.map((p) => (
               <BlogCard
                 key={p.id}
-                href={href(lang, "blog", postSlug(p, lang))}
+                href={href("blog", p.slug)}
                 image={p.cover}
                 title={t(p.title, lang)}
                 excerpt={t(p.excerpt, lang)}

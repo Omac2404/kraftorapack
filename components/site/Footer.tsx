@@ -90,7 +90,7 @@ export function Footer({
                   ).map(([key, label]) => (
                     <li key={key} className={bullet}>
                       {chevron}
-                      <Link href={href(lang, key)} className="hover:text-brand-700">
+                      <Link href={href(key)} className="hover:text-brand-700">
                         {label}
                       </Link>
                     </li>
@@ -103,7 +103,7 @@ export function Footer({
                   {t(general.footer.sustainability, lang)}
                 </p>
                 <Link
-                  href={href(lang, "urunler")}
+                  href={href("urunler")}
                   className="mt-4 inline-flex items-center gap-1 rounded-[10px] border-2 border-brand-600 px-[30px] py-[6px] text-[13px] font-bold text-brand-600 transition hover:bg-brand-600 hover:text-white"
                 >
                   {d.allProducts}
@@ -112,13 +112,13 @@ export function Footer({
                 <ul className="mt-5 flex flex-wrap gap-x-4 gap-y-1 text-[12px] text-[#666]">
                   {(
                     [
-                      ["kvkk", lang === "tr" ? "KVKK" : "KVKK"],
-                      ["gizlilik", lang === "tr" ? "Gizlilik Politikası" : "Privacy Policy"],
-                      ["cerez", lang === "tr" ? "Çerez Politikası" : "Cookie Policy"],
+                      ["kvkk", d.footer.kvkk],
+                      ["gizlilik", d.footer.privacy],
+                      ["cerez", d.footer.cookiePolicy],
                     ] as const
                   ).map(([key, label]) => (
                     <li key={key}>
-                      <Link href={href(lang, key)} className="hover:text-brand-700">
+                      <Link href={href(key)} className="hover:text-brand-700">
                         {label}
                       </Link>
                     </li>

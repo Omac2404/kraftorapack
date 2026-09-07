@@ -33,8 +33,8 @@ export default async function GalleryPage({ params }: { params: Promise<{ lang: 
           <CtaBox
             title={t(pages.gallery.ctaTitle, lang)}
             text={t(pages.gallery.ctaText, lang)}
-            primary={{ label: d.contactUs, href: href(lang, "iletisim") }}
-            secondary={{ label: d.viewProducts, href: href(lang, "urunler") }}
+            primary={{ label: d.contactUs, href: href("iletisim") }}
+            secondary={{ label: d.viewProducts, href: href("urunler") }}
             layout="column"
           />
         </div>

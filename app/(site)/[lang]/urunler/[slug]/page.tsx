@@ -3,7 +3,7 @@ import { notFound, redirect } from "next/navigation";
 import { Marquee } from "@/components/site/Marquee";
 import { QuoteModal } from "@/components/site/QuoteModal";
 import { getGeneralSettings } from "@/lib/data/settings";
-import { findProductBySlug, productSlug } from "@/lib/data/content";
+import { findProductBySlug } from "@/lib/data/content";
 import { getDict, href } from "@/lib/i18n";
 import { t } from "@/lib/l10n";
 import { resolveLang } from "@/lib/lang";
@@ -24,9 +24,9 @@ export default async function ProductPage({ params }: { params: Params }) {
   const product = await findProductBySlug(slug);
   if (!product || !product.published) notFound();
 
-  // Dil değiştirme bağlantısı diğer dilin slug'ıyla gelmiş olabilir → canonical adrese yönlendir
-  const canonical = productSlug(product, lang);
-  if (canonical !== slug) redirect(href(lang, "urunler", canonical));
+  // Eski İngilizce slug ile gelindiyse tek canonical adrese yönlendir
+  const canonical = product.slug;
+  if (canonical !== slug) redirect(href("urunler", canonical));
 
   const d = getDict(lang);
   const general = await getGeneralSettings();

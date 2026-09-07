@@ -5,7 +5,7 @@ import { CtaBox } from "@/components/site/CtaBox";
 import { CardIcon } from "@/components/site/Icon";
 import { getAboutSettings, getGeneralSettings } from "@/lib/data/settings";
 import { getDict, href } from "@/lib/i18n";
-import { t } from "@/lib/l10n";
+import { t, type Lang } from "@/lib/l10n";
 import { resolveLang } from "@/lib/lang";
 import type { AboutBlock } from "@/lib/settings/hakkimizda";
 
@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   return { title: getDict(lang).nav.about };
 }
 
-function Block({ block, lang, reverse }: { block: AboutBlock; lang: "tr" | "en"; reverse?: boolean }) {
+function Block({ block, lang, reverse }: { block: AboutBlock; lang: Lang; reverse?: boolean }) {
   return (
     <div className="mb-[60px] grid items-center gap-8 md:mb-[70px] md:grid-cols-2 md:gap-[50px]">
       <div className={reverse ? "md:order-2" : ""}>
@@ -83,8 +83,8 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
           <CtaBox
             title={t(about.cta.title, lang)}
             text={t(about.cta.text, lang)}
-            primary={{ label: d.viewProducts, href: href(lang, "urunler") }}
-            secondary={{ label: d.contactUs, href: href(lang, "iletisim") }}
+            primary={{ label: d.viewProducts, href: href("urunler") }}
+            secondary={{ label: d.contactUs, href: href("iletisim") }}
           />
         </div>
       </div>

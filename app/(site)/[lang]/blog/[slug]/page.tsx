@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { RichText } from "@/components/site/RichText";
 import { Icon } from "@/components/site/Icon";
-import { findPostBySlug, getPublishedPosts, postSlug } from "@/lib/data/content";
+import { findPostBySlug, getPublishedPosts } from "@/lib/data/content";
 import { formatDate, getDict, href } from "@/lib/i18n";
 import { t } from "@/lib/l10n";
 import { resolveLang } from "@/lib/lang";
@@ -24,8 +24,8 @@ export default async function BlogPostPage({ params }: { params: Params }) {
   const post = await findPostBySlug(slug);
   if (!post || !post.published) notFound();
 
-  const canonical = postSlug(post, lang);
-  if (canonical !== slug) redirect(href(lang, "blog", canonical));
+  const canonical = post.slug;
+  if (canonical !== slug) redirect(href("blog", canonical));
 
   const d = getDict(lang);
   const others = (await getPublishedPosts()).filter((p) => p.id !== post.id).slice(0, 4);
@@ -75,7 +75,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
                   {others.map((o) => (
                     <li key={o.id}>
                       <Link
-                        href={href(lang, "blog", postSlug(o, lang))}
+                        href={href("blog", o.slug)}
                         className="flex items-start gap-3 group"
                       >
                         <div className="size-12 shrink-0 overflow-hidden rounded-md bg-card">
@@ -97,7 +97,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
               </div>
             )}
             <Link
-              href={href(lang, "blog")}
+              href={href("blog")}
               className="flex items-center justify-center gap-1 rounded-[14px] border border-line bg-white px-5 py-4 text-[13px] font-semibold text-ink transition hover:border-ink"
             >
               <Icon name="chevron-right" className="size-3.5 rotate-180" />

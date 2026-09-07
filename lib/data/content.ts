@@ -2,7 +2,6 @@ import "server-only";
 import { asc, desc, eq, or } from "drizzle-orm";
 import { db } from "@/db";
 import { blogPosts, galleryImages, products } from "@/db/schema";
-import type { Lang } from "@/lib/l10n";
 import type { BlogPost, GalleryImage, Product } from "@/lib/content/types";
 
 // ---------- Ürünler ----------
@@ -52,8 +51,8 @@ export async function getProductById(id: number): Promise<Product | null> {
   return rows[0] ? toProduct(rows[0]) : null;
 }
 
-// Verilen slug'ı iki dilde de arar; dil değiştirme bağlantıları diğer dilin
-// slug'ıyla gelebilir, sayfa kendi canonical adresine yönlendirir.
+// Slug'ı iki sütunda da arar: adresler Türkçe slug üzerinden yürür, eski
+// İngilizce slug'la gelen bağlantılar sayfada canonical adrese yönlendirilir.
 export async function findProductBySlug(slug: string): Promise<Product | null> {
   const rows = await db
     .select()
@@ -63,8 +62,6 @@ export async function findProductBySlug(slug: string): Promise<Product | null> {
   return rows[0] ? toProduct(rows[0]) : null;
 }
 
-export const productSlug = (p: Pick<Product, "slug" | "slugEn">, lang: Lang) =>
-  lang === "en" ? p.slugEn : p.slug;
 
 // ---------- Blog ----------
 
@@ -120,8 +117,6 @@ export async function findPostBySlug(slug: string): Promise<BlogPost | null> {
   return rows[0] ? toPost(rows[0]) : null;
 }
 
-export const postSlug = (p: Pick<BlogPost, "slug" | "slugEn">, lang: Lang) =>
-  lang === "en" ? p.slugEn : p.slug;
 
 // ---------- Galeri ----------
 

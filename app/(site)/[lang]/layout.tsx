@@ -36,7 +36,7 @@ export default async function SiteLayout({
         linkLabel={d.cookie.link}
         after={d.cookie.after}
         accept={d.cookie.accept}
-        policyHref={href(lang, "cerez")}
+        policyHref={href("cerez")}
       />
     </>
   );
