@@ -1,6 +1,6 @@
 # Kraftora
 
-kraftora.com — sürdürülebilir kraft ambalaj üreticisi kurumsal sitesi. Özel yazılım: üç dilli (TR/EN/FR) kurumsal site + yönetim paneli. WordPress'ten bağımsız.
+kraftorapack.com — sürdürülebilir kraft ambalaj üreticisi kurumsal sitesi. Özel yazılım: üç dilli (TR/EN/FR) kurumsal site + yönetim paneli. WordPress'ten bağımsız.
 
 ## Stack
 

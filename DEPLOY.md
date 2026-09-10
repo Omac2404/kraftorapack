@@ -24,10 +24,10 @@ Projeye bir **App** servisi ekle (örnek ad: `web`):
 
 ```
 DATABASE_URL=postgres://KULLANICI:SIFRE@projeadi_db:5432/VERITABANI
-SEED_ADMIN_EMAIL=admin@kraftora.com
+SEED_ADMIN_EMAIL=admin@kraftorapack.com
 SEED_ADMIN_NAME=Admin
 SEED_ADMIN_PASSWORD=guclu-bir-sifre
-NEXT_PUBLIC_SITE_URL=https://kraftora.com
+NEXT_PUBLIC_SITE_URL=https://kraftorapack.com
 ```
 
 ## 4. Kalıcı depolama (App > Mounts)

@@ -14,7 +14,7 @@ import {
 import { cardCls, fileCls, FormStatus, inputCls, labelCls, LInput, LTextarea, type ActionState } from "./Fields";
 
 // Google önizlemesinde gösterilen alan adı (NEXT_PUBLIC_SITE_URL'den türetilir)
-const SITE_HOST = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://kraftora.com")
+const SITE_HOST = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://kraftorapack.com")
   .split("//")
   .pop()!
   .split("/")[0];
