@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { Icon } from "./Icon";
 
-// Sağ altta yuvarlak "yukarı çık" butonu; sayfa biraz kaydırılınca görünür
+// Sağ altta yuvarlak "yukarı çık" butonu; sayfa biraz kaydırılınca görünür.
+// WhatsApp baloncuğunun (bottom-5, 56px) hemen üstünde, onunla aynı eksende durur.
 export function ScrollTop() {
   const [visible, setVisible] = useState(false);
 
@@ -19,7 +20,7 @@ export function ScrollTop() {
       type="button"
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Yukarı çık"
-      className={`fixed bottom-5 right-5 z-30 flex size-9 items-center justify-center rounded-full border-2 border-[#ccc] bg-white/90 text-[#777] shadow transition hover:border-brand-500 hover:text-brand-500 ${
+      className={`fixed bottom-[84px] right-[30px] z-30 flex size-9 items-center justify-center rounded-full border-2 border-[#ccc] bg-white/90 text-[#777] shadow transition hover:border-brand-500 hover:text-brand-500 ${
         visible ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
     >

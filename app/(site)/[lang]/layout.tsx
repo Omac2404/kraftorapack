@@ -2,6 +2,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ScrollTop } from "@/components/site/ScrollTop";
 import { CookieConsent } from "@/components/site/CookieConsent";
+import { WhatsAppBubble } from "@/components/site/WhatsAppBubble";
 import { getContactSettings, getGeneralSettings } from "@/lib/data/settings";
 import { getDict, href } from "@/lib/i18n";
 import { resolveLang } from "@/lib/lang";
@@ -30,6 +31,7 @@ export default async function SiteLayout({
       />
       <main>{children}</main>
       <Footer lang={lang} general={general} contact={contact} />
+      <WhatsAppBubble number={contact.phoneHref.replace(/\D/g, "")} label={d.whatsapp} />
       <ScrollTop />
       <CookieConsent
         text={d.cookie.text}
