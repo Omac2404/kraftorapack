@@ -41,6 +41,8 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
   const d = getDict(lang);
   const [contact, general] = await Promise.all([getContactSettings(), getGeneralSettings()]);
   const p = contact.page;
+  // WhatsApp bağlantısı iletişim telefonundan üretilir (wa.me yalnızca rakam ister)
+  const waNumber = contact.phoneHref.replace(/\D/g, "");
   const socials = (
     [
       ["facebook", "facebook"],
@@ -92,6 +94,17 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
                 </div>
               )}
             </InfoCard>
+            {waNumber && (
+              <a
+                href={`https://wa.me/${waNumber}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 self-start rounded-full bg-[#25D366] px-6 py-3 text-[14px] font-bold text-white transition hover:bg-[#1DA851]"
+              >
+                <Icon name="whatsapp" className="size-5" />
+                {d.whatsapp}
+              </a>
+            )}
           </div>
 
           <div className="rounded-xl border border-brand-500/10 bg-card px-6 py-8 md:px-8 md:py-9">
