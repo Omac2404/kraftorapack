@@ -13,6 +13,12 @@ import {
 } from "@/app/actions/teknik";
 import { cardCls, fileCls, FormStatus, inputCls, labelCls, LInput, LTextarea, type ActionState } from "./Fields";
 
+// Google önizlemesinde gösterilen alan adı (NEXT_PUBLIC_SITE_URL'den türetilir)
+const SITE_HOST = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://kraftora.com")
+  .split("//")
+  .pop()!
+  .split("/")[0];
+
 export function HeadCodeForm({ initial }: { initial: string }) {
   const [state, action, pending] = useActionState<ActionState, FormData>(saveHeadCode, {});
   return (
@@ -146,7 +152,7 @@ export function SeoForm({ initial }: { initial: TechnicalSettings["seo"] }) {
         <p className="mb-3 text-xs font-bold uppercase tracking-wider text-[#999]">Google Önizlemesi (TR)</p>
         <div className="rounded-lg bg-white p-4 shadow-sm">
           <p className="text-sm text-[#202124]">
-            kraftorapack.com<span className="text-[#5f6368]"> › </span>
+            {SITE_HOST}<span className="text-[#5f6368]"> › </span>
           </p>
           <p className="mt-1 truncate text-xl leading-snug text-[#1a0dab]">{title || "Site başlığı"}</p>
           <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-[#4d5156]">

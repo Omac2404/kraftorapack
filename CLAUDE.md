@@ -1,4 +1,4 @@
-# Kraftora (kraftorapack.com)
+# Kraftora (kraftora.com)
 
 Kurumsal site + yönetim paneli. Üç dilli: Türkçe (kaynak dil), İngilizce, Fransızca. Adresler tek dillidir ve
 dile göre DEĞİŞMEZ (`/urunler`); dil tercihi `lang` çerezinde tutulur. Panel Türkçe (`/admin/giris`, `/admin/urunler`).
